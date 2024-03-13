@@ -1,0 +1,23 @@
+<div class="bg-blue-200 card">
+    {% if user.is_authenticated %}
+    <!-- COMMENT FORM -->
+        <div class="shadow card">
+            <div class="container mt-2">
+                <form method="POST" , action="{% url 'comment-sent' plot.id %}">
+                    {% csrf_token %}
+                    {{ commentform.as_p }}
+                    <button class="mb-2 bg-blue-300 border border-blue-500 shadow btn hover:bg-blue-500 hover:text-white"
+                        type="submit">Add Comment</button>
+                </form>
+            </div>
+        </div>
+    
+    {% else %}
+    <h3 class="text-center"><a href="{% url 'login' %}">Login</a> If You Want to Make a Comment</h3>
+    {% endif %}
+    <div class="my-4 col" id="tab-contents">
+        {% for comment in plot.comments.all %}
+        {% include 'includes/comment.html' %}
+        {% endfor %}
+    </div>
+</div>

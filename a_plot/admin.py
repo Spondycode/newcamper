@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Plot, Comment, Reply, LikedPlot, LikedComment
 
-# Register your models here.
+admin.site.register(Plot)
+admin.site.register(Comment)
+admin.site.register(Reply)
+admin.site.register(LikedPlot)
+admin.site.register(LikedComment)

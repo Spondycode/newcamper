@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<p class="py-4 text-center lg:hidden dark:bg-yellow-600 dark:text-white">Scroll down for help with filling the form</p>
+
+
+
+<div class="flex flex-col mx-5 mt-3 ">
+
+    <div class="flex flex-col mx-auto lg:flex-row lg:max-w-7xl">
+        <div class="pb-4 ">
+                <div class="row row-cols-md">
+                    <div class="p-3 mx-3 mb-4 ml-3 border-2 shadow card bg-sky-200 dark:bg-sky-700 lg:min-w-96 lg:border-0">
+                        <h3 class="text-2xl font-semibold text-center dark:text-white">Add Your Plot</h3>
+
+                        {% if submitted %}
+                        Your Plot was submitted successfully
+                        {% else %}
+
+                        <form class="space-y-4 " method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="flex justify-around gap-2 my-4 ">
+                                <input type="submit" value="Submit" class="text-white bg-blue-700 dark:bg-blue-900 ">
+                                <a class="p-4 bg-gray-400 rounded-md dark:bg-gray-700 dark:text-white" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+
+
+        <div class="p-6">
+            <div class="flex flex-col gap-2 p-6 dark:text-white">
+                <h4 class="pb-2 text-2xl font-semibold text-center dark:text-yellow-50">How to Fill in the Form</h4>
+                <p><strong>Title: </strong>Whatever you want to call the plot</p>
+                <p><strong>Description: </strong>Add the details of what it is you like about the plot. Such as if
+                    it is sunny or with shade. Is it close to the facilities, like the showers, electric hookup and water?</p>
+                <p><strong>Price: </strong>How much does it cost per night</p>
+                <p><strong>Image: </strong>Add a photo to upload</p>
+                <p><strong>Plot Number: </strong>The reference number used by the campsite</p>
+                <p><strong>What3Words: </strong><a target="_blank" href="https://what3words.com/">What3Words</a>
+                    is an excellent system to mark a spot easily. The whole
+                    of the earth is divided into 3m squares. You could be in the middle of a desert or in forest,
+                    well away from any civilisation. Still you can send an address using just 3 words.</p>
+                <p>Add the complete url including https://</p>
+                <p>It will look something like this - <span class="p-2 rounded-full bg-sky-200">https://w3w.co/reimpose.pleasures.yowled</span></p>
+                <div class="p-2 text-center text-white bg-red-700 rounded-lg">IMPORTANT
+        
+        
+                    <p>Especially for the non campsite spots. If you don't add the What3Words address, no one else will be able
+                        to find it and you might not find it again either.</p>
+                </div>
+        
+                <div class="my-5 text-center"><a class="p-4 text-white bg-blue-700 rounded-md"
+                        href="https://what3words.com/products/what3words-app">Get the What3Words App
+                    </a></div>
+                <p><strong>Campsite: </strong>What is the name of the campsite</p>
+                <p><strong>Categories: </strong>What sort of camping? Three categories to choose from. Wild and that's where
+                    ever and without any
+                    organisation. The other options are Camping site and Official site but not a camp site. Here in Spain many
+                    towns set up a place for
+                    passing campervans, RV, and Motorhomes. Be aware some countries don't allow wild camping if you want to put
+                    up a tent. Usually due to wild fire concerns,
+                    which seems reasonable here in dry Spain. </p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+
+
+{% endblock %}

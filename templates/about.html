@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="bg-gray-100 dark:bg-gray-700" >
+        <div class="flex flex-col max-w-6xl p-4 mx-auto space-y-4 text-gray-700 rounded-lg bg-sky-20 dark:text-white">
+            <h1 class="mb-5 text-2xl font-semibold text-center dark:text-white">About Page</h1>
+            <h2 class="text-xl font-semibold dark:text-white">Every Camper is Unique</h2>
+            <p class="lead dark:text-white"">I used to work as a receptionist in a campsite in Platja d'Aro, Costa Brava, Spain. One thing I learned for sure is that campers like to get a good plot for the tent, caravan, massive RV, small campervan or hammock. What makes it a good plot is highly personal and individual. Some people insist on a clear view of the sky, either for the television coverage or to get as much sun as possible. Then other campers really need to have a plot with lots of shade from trees because they don't have air conditioning and need the cool afforded by the trees</p>
+            <h2 class="text-xl font-semibold dark:text-white">Services and Amenities</h2>
+            <p >Then there are the services and conveniences. Is the plot next to bathrooms? Does it have water and electric hook up nearby. Is there a view of the beach as soon as you step onto the space in front of the caravan or camper? Nothing quite like listening to the waves on the beach, especially if you usually live hundreds of kilometres from the sea. Perhaps the plot is always good because you have good neighbours in that place on the campsite.</p>
+            <h2 class="text-xl font-semibold dark:text-white">Enjoying the best of Nature</h2>
+            <p>Not everyone wants to always be in a proper campsite. You prefer either the camping spots set up in or near to a small town where they have set up the basics, such as water and electric supply. Usually great because of nearby shops and amenities. Then you might just have found a spot which is totally wild and it is perfect for the privacy and the direct connection to nature. Maybe you just could not drive any more for the day and had to stop and rest for the night before moving on. Sometimes that can be the best of camping spots. Some countries you are not allowed to do that especially if you are in a tent and then you have the risks of fires. So take care in those situations. </p>
+        </div>
+        <hr class="my-10 border-2 border-blue-900">
+    
+        <div class="grid gap-6 mx-auto my-6 max-w-7xl lg:grid-cols-4 min-h-96 md:grid-cols-2">
+            <div class="h-full">{% include 'includes/plotoftheweek.html' %}</div>
+            <div class="h-full ">{% include 'includes/products.html' %} </div>
+            <div class="h-full">{% include 'includes/languages.html' %}</div>
+            <div class="h-full">{% include 'includes/search.html' %}</div>
+        </div>
+    </div>
+{% endblock content %}
+    

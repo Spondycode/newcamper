@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+{% if search %}
+
+<!-- Showcase for non-authenticated users -->
+<div class="mx-auto text-2xl ">
+    {% if not user.is_authenticated %}
+    {% include 'includes/showcase.html' %}
+    {% endif %}
+</div>
+
+<!-- Main section -->
+<main class="grid grid-cols-1 lg:grid-cols-4">
+    <div class="col-span-3 p-4 mx-auto bg-slate-300 dark:bg-slate-500">
+        <h1 class="p-2 text-center bg-slate-100">You Searched for {{ search }}</h1>
+        {% include 'includes/cards.html' %}
+        {% block main %}{% endblock main %}
+    </div>
+    <div class="col-span-1 bg-slate-200 dark:bg-slate-400">
+        {% include 'includes/sidebar1.html' %}
+    </div>
+
+</main>
+
+{% endif %}
+
+{% endblock content %}

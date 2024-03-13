@@ -1,0 +1,19 @@
+<div class="p-2 shadow-lg card rounded-4 bg-sky-300">
+    <h3 class="my-2 text-2xl font-semibold text-center">Categories</h3>
+    <p class="px-3">Is the plot in a campsite or one of those official camping spots you find in or near a town. Or is it totally
+        wild and you found it and loved it because it was a special place?</p>
+   
+    <h5 class="my-3 text-2xl text-center">Search based on Category</h5>
+
+
+    <div class="flex flex-col justify-around pb-3 text-center xl:flex-row">
+        <a href="{% url 'campsite-plots' %}" class="p-3 m-1 text-white bg-blue-700 rounded-md">
+            Campsite </a>
+        <a href=" {% url 'official-plots' %}" class="p-3 m-1 bg-yellow-500 rounded-md">
+            Official</a>
+        <a href="{% url 'wild-plots' %}" class="p-3 m-1 text-white bg-green-700 rounded-md">
+            Wild</a>
+    </div>
+
+
+</div>

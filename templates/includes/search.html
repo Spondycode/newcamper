@@ -1,0 +1,39 @@
+<div class="min-h-full p-2 rounded-lg shadow-lg bg-slate-100 dark:bg-slate-600">
+    <h3 class="my-2 text-2xl font-semibold text-center text-blue-800 dark:text-gray-200">Search Titles</h3>
+    <p class="px-3 text-blue-800 dark:text-gray-200">Search for a plot by title - The name Super Campers give to the plot that was just right for your stay.</p>
+
+<!-- in the action below add this{ url 'search_plots' } -->
+    <div class="">
+        <form class="flex flex-col bg-blue-200 border-0 rounded-md" method="POST" action="{% url 'search-plots' %}" type="search" placeholder="Search">
+            {% csrf_token %}
+            <input class="border-0 rounded-md form-control" type="search" placeholder="Name of Plot" aria-label="Search" name="search">
+            <button class="m-3 border-2 border-blue-700 rounded-md hover:bg-blue-700 hover:text-white" type="submit">Search</button>
+        </form>
+        <hr class="mt-1 mb-3 border-2 border-purple-800">
+    </div>
+
+
+    <h3 class="mt-5 text-2xl font-semibold text-center text-blue-800 dark:text-gray-200">Campsite Search</h3>
+    <p class="px-3 text-blue-800 dark:text-gray-200">Search for plots on a specific campsite.</p>
+    <div class="">
+        <form class="flex flex-col bg-blue-200 border-0 rounded-md" method="POST" action="{% url 'search-campsites' %}" type="search" placeholder="Campsite">
+            {% csrf_token %}
+            <input class="border-0 rounded-md form-control" type="search" placeholder="Campsite Name" aria-label="Search" name="search">
+            <button class="m-3 border-2 border-blue-700 rounded-md hover:bg-blue-700 hover:text-white" type="submit">Search</button>
+        </form>
+        <hr class="mt-1 mb-3 border-2 border-purple-800">
+    </div>
+
+
+    <h3 class="mt-4 text-2xl font-semibold text-center text-blue-800 dark:text-gray-200">Search by Country</h3>
+    <p class="px-3 text-blue-800 dark:text-gray-200">Heading off to France, Spain or Poland for a couple of days camping? Which plots have other campers recommended?</p>
+
+<!-- In the action below add this { url 'search_countries' } - add back the %% -->
+    <div class="">
+        <form class="flex flex-col bg-blue-200 border-0 rounded-md" method="POST" action="{% url 'search-countries' %}" type="search" placeholder="Search">
+            {% csrf_token %}
+            <input class="border-0 rounded-md form-control" type="search" placeholder="Country" aria-label="Search" name="search">
+            <button class="m-3 border-2 border-blue-700 rounded-md hover:bg-blue-700 hover:text-white" type="submit">Search</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+    <!-- Main section -->
+    <main class="grid grid-cols-1 lg:grid-cols-4 ">
+        <div class="col-span-3 p-4 bg-slate-300">
+                <div class="text-center ">
+                    <h3 class="mb-2 text-2xl font-semibold text-center text-blue-800 ">
+                        {{ plot.title }}</h3>
+                </div>
+                <!-- Plot image -->
+                <figure>
+                    {% if plot.plot_image %}
+                    <a href="#"><img class="w-full mb-2" src="{{ plot.plot_image.url }}" alt="Plot Image"></a>
+                    {% else %}
+                    <a href="#"><img class="mb-2 w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
+                    {% endif %}
+                </figure>
+                <div class="w-full my-2 text-center">
+                    {% if plot.categories == 'Campsite' %}
+                    <a class="block px-3 mt-3 text-white placeholder-transparent bg-blue-700 btnBerty really likes thisBerb " href="{% url 'campsite-plots' %}">Campsite</a>
+                    {% endif %}
+
+                    {% if plot.categories == 'Official' %}
+                    <a class="block px-3 mt-3 bg-yellow-300 btn" href="{% url 'official-plots' %}">Official</a>
+                    {% endif %}
+
+                    {% if plot.categories == 'Wild' %}
+                    <a class="block px-3 mt-3 text-white bg-green-700 btn" href="{% url 'wild-plots' %}">Wild</a>
+                    {% endif %}
+                </div>
+ 
+                <div class="p-5 mt-5 text-xl">
+                    <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
+                    
+                    <p><strong>Campsite:</strong> {{ plot.campsite }}</p>
+                    <p><strong>Price Per Night:</strong> {{ plot.price }}</p>
+                    <p><strong>Country:</strong> {{ plot.countries }}</p>
+                    
+                    {% if plot.what3words is not None %}
+                    <p><strong>What3Words:</strong> <a class="p-4 ml-3 text-white bg-blue-600 btn" href="{{ plot.what3words }}"> Get Directions</a> </p>
+                    <p class="p-3">This is a precise what3words address, made of 3 random words. Every 3 metre square in
+                        the world has its own unique what3words address.</p>
+                        {% endif %}
+                    
+                    
+                    {% if user != plot.owner %}
+                    
+                    {% if plot.owner %}
+                    <div class="p-4 my-6 border-2 rounded-lg bg-slate-400 mx-14">
+                        <a href="{% url 'user-profile' plot.owner.username %}">
+                            
+                            <p class="text-center"><strong>Plot Poster:</strong> {{ plot.owner.username }} </p>
+                        </a>
+                            <p class="text-center"><strong>Real Name:</strong> {{ plot.owner.profile.realname }} </p>
+                        {% else %}
+                        <span>No Owner</span>
+                    </div>
+                    {% endif %}
+                        
+                </div>
+
+                <hr class="m-6 border-2 border-blue-900">
+                <div class="mx-3 ">
+                    <div class="my-3 ">
+                        {% if plot.comments.count %}
+                        <h5 class="mt-2 text-xl text-center text-blue-600">
+                            📣 Comments: <span class="">{{ plot.comments.count }}</span>
+                        </h5>
+                        {% else %}
+                        <p class="text-2xl text-center ">📣 Add a Comment below..</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h5 class="mb-3 text-xl text-center ">
+                            
+                            {% if user in plot.likes.all %}
+                            💙 Plot Liked: {{ plot.likes.count }}
+                            {% else %}
+                            ❤️ Likes: {{ plot.likes.count }}    
+                            {% endif %}
+                                
+                        </h5>
+                    </div>
+                </div>
+                <div class="text-center">
+                    {% if user.is_authenticated and user != plot.author %}
+                    
+                        {% if user in plot.likes.all %}
+                        <a class="w-64 bg-gray-400 btn " href="{% url 'like-plot' plot.id %}">Remove Like</a>                       
+                        {% else %}
+                        <a class="w-64 mx-auto text-white bg-red-600 btn" href="{% url 'like-plot' plot.id %}">Like</a>
+                        {% endif %}
+                </div>
+                    {% endif %}
+
+                {% endif %}
+
+                <hr class="m-6 border-2 border-blue-900">
+
+                <div class="flex justify-around gap-4">
+
+                    {% if user.is_authenticated and user == plot.owner %}
+
+                    <a class="border-2 border-yellow-500 btn hover:bg-yellow-500 " href="{% url 'edit-plot' plot.id %}">Edit Plot</a>
+                    <a class="border-2 border-red-500 btn hover:bg-red-500 " href="{% url 'delete-plot' plot.id %}">Delete Plot</a>
+                    {% else %}
+                    <a class="mx-4 text-center text-blue-600 border-2 border-blue-700 btn w-44 hover:bg-blue-600 hover:text-white" href="{% url 'home' %}">Home</a>
+
+                    {% endif %}
+                    
+                    {% if user.is_superuser  %}
+                    <a class="text-center bg-red-600 btn" href="{% url 'delete-plot' plot.id %}">Delete Plot</a>
+                    {% endif %}
+                        
+                </div>
+
+                <h2 class="py-2 mt-3 mb-2 text-2xl font-semibold text-center text-white rounded-lg bg-sky-400 lg:py-6">Comments & Replies</h2>
+
+    <div class="bg-blue-200 card">
+        {% if user.is_authenticated %}
+        <!-- COMMENT FORM -->
+            <div class="shadow card">
+                <div class="container mt-2">
+                    <form method="POST" , action="{% url 'comment-sent' plot.id %}">
+                        {% csrf_token %}
+                        {{ commentform.as_p }}
+                        <button class="mb-2 bg-blue-300 border border-blue-500 shadow btn hover:bg-blue-500 hover:text-white"
+                            type="submit">Add Comment</button>
+                    </form>
+                </div>
+            </div>
+        
+        {% else %}
+        <h3 class="text-center"><a href="{% url 'login' %}">Login</a> If You Want to Make a Comment</h3>
+        <div class="my-4 col" id="tab-contents">
+            {% endif %}
+            {% for comment in plot.comments.all %}
+            {% include 'includes/comment.html' %}
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+      <!--   SIDEBAR -->
+        <aside class="col-span-1 bg-slate-200">
+            {% include 'includes/sidebar1.html' %}
+        </aside>
+
+    </main>
+
+
+{% endblock content %}

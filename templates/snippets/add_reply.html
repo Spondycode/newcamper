@@ -1,0 +1,20 @@
+<fade-in class="block -mt-20 ease-in-out opacity-0" 
+_="on load transition my margin-top to 0 over 0.2 seconds then transition my opacity to 1 over 0.4 seconds">
+    {% include 'a_plots/reply.html' %}
+</fade-in>
+
+<form class="m-2" autocomplete="off" 
+hx-post="{% url 'reply-sent' comment.id %}"
+hx-target="this"
+hx-swap="outerHTML">
+    {% csrf_token %}
+    <div class="flex space-x-2">
+        <div class="flex-grow ">{{ replyform.as_p }}</div>
+        <button class="block p-2 mb-2 rounded-md shadow bg-sky-500 hover:bg-sky-700">Submit</button>
+    </div>
+</form>
+
+
+<h5 hx-swap-oob="true" id="repliescount-{{ comment.id }}" class="mt-2 text-xl text-center text-blue-600">
+    📣 Comments: <span class="">{{ comment.replies.count }}</span>
+</h5>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="p-4 mx-auto rounded-md max-w-7xl bg-sky-200">
+
+    
+        <div class="flex mx-auto">
+            <div class="p-4 m-2 mx-auto bg-white rounded-md shadow">
+                <h3 class="text-center">{{ plot.title }}</h3>
+                <p class="text-truncate"><strong>Description:</strong> {{ plot.description }}</p>
+                <figure>
+                    <img class="w-75 " src="{{ plot.image }}" alt="">
+                </figure>
+                <ul>
+                    <li><strong>Campsite:</strong> {{ plot.campsite }}</li>
+                    <li><strong>Price Per Night:</strong> {{ plot.price }}</li>
+                    <li><strong>Country:</strong> {{ plot.country }}</li>
+                    {% if plot.what3words is not None %}
+                    <p class="p-3"> Every 3 metre square in
+                        the world has its own unique what3words address.</p>
+                    <li><strong>What3Words:</strong> <a href="{{ plot.what3words }}"> Get Directions</a> </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="">
+            <div class="p-4">
+                <h2 class="mt-10 text-2xl font-semibold text-center">Delete Plot</h2>
+                <p class="mb-4 text-center">Are you sure you want to delete this plot?</p>
+                <form method='POST'>
+                    {% csrf_token %}
+                    <div class="flex flex-col gap-2 lg:flex-row lg:justify-around">
+                        <button class="p-2 text-white bg-blue-700 rounded-md shadow-md" type="submit">Confirm</button>
+                        <a class="p-2 text-center text-white rounded-md bg-slate-500 hover:bg-slate-400" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h1 class="text-2xl font-semibold text-center">All the Plots</h1>
+
+
+<div class="p-4 mx-auto max-w-7xl">
+    <table class="p-2 mx-auto text-sm border-b-2 border-collapse table-auto lg:text-base">
+        <thead>
+            <tr>
+                <th>Plot Title</th>
+                <th>Owner</th>
+                <th>Type</th>
+                <th>Plot Price</th>
+                <th>Plot List Date</th>
+                <th>Plot Campsite</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        {% for plot in plots %}
+<tbody class="border-b-2">
+    <tr>
+        <td class="p-2 cursor-pointer">
+            <a href="{% url 'show-plot' plot.id %}">
+                {{ plot.title }}
+            </a>
+        </td>
+        <td class="p-2 cursor-pointer">
+            <a href="{% url 'user-profile' plot.owner %}">
+                {{ plot.owner }}
+            </a>
+        </td>
+        <td class="p-2">
+            <!-- <a href="">
+                {{ plot.categories }}
+            </a> -->
+
+        
+            {% if plot.categories == 'Campsite' %}
+            <a class="block px-3 mt-3 text-center text-white bg-blue-600 btn hover:bg-blue-500 hover:shadow-md" href="{% url 'campsite-plots' %}">Campsite</a>
+            {% endif %}
+    
+            {% if plot.categories == 'Official' %}
+            <a class="block px-3 mt-3 text-center text-white bg-yellow-500 btn hover:bg-yellow-400 hover:shadow-md" href=" {% url 'official-plots' %}">Official</a>
+            {% endif %}
+    
+            {% if plot.categories == 'Wild' %}
+            <a class="block px-3 mt-3 text-center text-white bg-green-700 btn hover:bg-green-600 hover:shadow-md" href=" {% url 'wild-plots' %}">Wild</a>
+            {% endif %}
+
+
+        </td>
+        <td class="p-2">{{ plot.price }}</td>
+        <td class="p-2">{{ plot.list_date }}</td>
+        <td class="p-2">{{ plot.campsite }}</td>
+        <td class="p-2">{{ plot.countries }}</td>
+    </tr>
+</tbody>
+    <!-- {{ plot.title }} - {{ plot.list_date }}<br> -->
+    
+    {% endfor %}
+</table>
+</div>
+
+<div class="flex items-center justify-center mx-auto my-4">
+    
+    <div class="flex p-2 space-x-4">
+        {% if plots.has_previous %}
+            <a class="hover:bg-yellow-400" href="?page=1">&laquo First</a>
+            <a class="hover:bg-yellow-400" href="?page={{ plots.previous_page_number }}">Previous</a>
+        {% endif %}
+    </div>
+
+    
+    <div class="p-2 bg-gray-200 border-2 border-gray-400 rounded-md">Page {{ plots.number }} of {{ plots.paginator.num_pages }}</div>
+
+    <div class="flex p-2 space-x-4">
+        {% if plots.has_next %}
+        <a href="?page={{ plots.next_page_number }}">Next</a>
+            <a href="?page={{ plots.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </div>
+        
+</div>
+    
+    
+{% endblock content %}

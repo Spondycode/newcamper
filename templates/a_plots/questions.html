@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section class="pt-4 bg-slate-100">
+    
+
+
+<div class="mx-auto max-w-7xl">
+    <div id="accordion-collapse" data-accordion="collapse">
+        <h2 id="accordion-collapse-heading-1">
+          <button type="button" class="flex items-center justify-between w-full gap-3 p-5 font-semibold text-gray-500 border border-b-0 border-gray-200 rtl:text-right rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
+            <span class="">How Do I Add a Plot?</span>
+            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+            </svg>
+          </button>
+        </h2>
+        <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+          <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+            <p class="mb-2 text-gray-500 dark:text-gray-400">Registered users can add plots to the site. You can add a plot by clicking on the “Add Plot” button in the navigation bar. Then you fill in a form with the details of the plot. Was it easy to get your caravan or camper van in and out of th plot? Add as much information to help you remember why you like the plot. Is it close to amenities and services, water, electric hook up, toilets etc. Always a good idea to add a photo of the plot, best way to keep it fresh in your memory.</p>
+    
+          </div>
+        </div>
+        <h2 id="accordion-collapse-heading-2">
+          <button type="button" class="flex items-center justify-between w-full gap-3 p-5 font-semibold text-gray-500 border border-b-0 border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+            <span>What Products Do You Offer?</span>
+            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+            </svg>
+          </button>
+        </h2>
+        <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+          <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+            <p class="mb-2 text-gray-500 dark:text-gray-400">
+                Going to have mugs, t-shirts and stickers for sale.</p>
+            
+          </div>
+        </div>
+        <h2 id="accordion-collapse-heading-3">
+          <button type="button" class="flex items-center justify-between w-full gap-3 p-5 font-semibold text-gray-500 border border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+            <span>Security of Personal Data?</span>
+            <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+            </svg>
+          </button>
+        </h2>
+        <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+          <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+            <p class="mb-2 text-gray-500 dark:text-gray-400">The site will be fully GDPR compliant. Passwords and email addresses are properly encrypted at the base level. We promise not to sell or otherwise distribute any data on SuperCamper users.
+    
+                </p>
+            <p class="mb-2 text-gray-500 dark:text-gray-400">I recommend you do not put personal data into your camping plot reviews. You are encouraged to block out vehicle registration numbers if you feel safer doing so.
+    
+                </p>
+            <p class="mb-2 text-gray-500 dark:text-gray-400">For the recommendations it can be useful for you and other super camper to know what time of the year you visited the campsite. You don't have to be specific with dates. "A week in high summer" is enough.</p>
+    
+          </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-10 border-2 border-blue-900">
+
+<div class="grid gap-6 mx-auto my-6 max-w-7xl lg:grid-cols-4 min-h-96 md:grid-cols-2">
+    <div class="h-full">{% include 'includes/plotoftheweek.html' %}</div>
+    <div class="h-full ">{% include 'includes/products.html' %} </div>
+    <div class="h-full">{% include 'includes/languages.html' %}</div>
+    <div class="h-full">{% include 'includes/search.html' %}</div>
+</div>
+  
+</section>
+
+
+
+{% endblock content %}

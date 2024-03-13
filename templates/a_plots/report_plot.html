@@ -1,0 +1,22 @@
+
+
+{% extends 'base.html' %}
+<!-- {% load static %} -->
+{% block content %}
+<div class="max-w-4xl m-4 mx-auto card bg-sky-200">
+    <h1 class="text-2xl font-semibold text-center">Report Plot</h1>
+    <div class="p-4 mx-auto ">
+        <h3 class="mb-3 text-xl">What was wrong with it?</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="mb-3 text-white bg-purple-700 btn" type="submit" value="Report the Post">
+            <a class="block text-center text-white btn bg-slate-500" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+        </form>
+        <h2 class="mt-5 "> Reported by:  {{ user.id }}</h2>
+        <p class="mt-2">
+            This will remove the post from the site and the admin will be notified. We will not tolerate misuse of this website. Thank you for your help.
+        </p>
+    </div>
+</div>
+{% endblock content %}

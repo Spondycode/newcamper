@@ -45,10 +45,19 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "django_htmx",
     
+    'cloudinary_storage', #CLOUDINARY
+    'cloudinary',
+    
     "a_home",
     "a_users",
+    "a_plot"
     
-    "django_cleanup.apps.CleanupConfig",
+    # "django_cleanup.apps.CleanupConfig",
+]
+
+INTERNAL_IPS = [
+"127.0.0.1",
+"localhost:8000"
 ]
 
 MIDDLEWARE = [
@@ -141,6 +150,15 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+
+    
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('CLOUD_API_KEY'),
+    'API_SECRET': env('CLOUD_API_SECRET'),
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

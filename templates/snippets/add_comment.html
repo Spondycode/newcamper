@@ -1,0 +1,7 @@
+<fade-in class="block -mt-20 ease-in-out opacity-0" 
+_="on load transition my margin-top to 0 over 0.2 seconds then transition my opacity to 1 over 0.4 seconds">
+    {% include 'includes/comment.html' %}
+</fade-in>
+<h5 hx-swap-oob="true" id="commentscount-{{ plot.id }}" class="mt-2 text-xl text-center text-blue-600">
+    📣 Comments: <span class="">{{ plot.comments.count }}</span>
+</h5>

@@ -1,0 +1,25 @@
+
+      <div class="grid grid-cols-1 gap-5 mx-auto mt-4 lg:grid-cols-2 max-w-screen-2xl">
+        <div class="p-3 text-center">
+          <h1 class="mt-3 text-2xl font-semibold text-blue-700">Super <span class="text-red-700 "> Camper</span></h1>
+          <p class="py-3">
+            All the best camping plots you have found all around Europe. Was the
+            plot easy to get into and out of? Was it a nice place to stay? Did you
+            have a good time? Let us know! How far away was the electric hook up
+            point?
+          </p>
+          <p class="mb-6">
+            Are there shops nearby or other facilities like restaurants and
+            children's playgrounds?
+          </p>
+          
+          {% if not user.is_authenticated %}
+          <a class="px-4 py-2 text-white bg-blue-600 btn" href="{% url 'account_signup' %}">Let's Get Started</a>
+          {% endif %}
+            
+  
+        </div>
+        <img class=""
+          src="https://res.cloudinary.com/df4x68pyj/image/upload/v1700742003/samples/landscapes/nature-mountains.jpg"
+          alt="landscape picture" />
+      </div>

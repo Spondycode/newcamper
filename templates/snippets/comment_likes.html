@@ -1,0 +1,28 @@
+<div>
+    <div class="text-red-600">
+    
+    {% if comment.likes.count %}
+        
+    
+    {% if user in comment.likes.all %}
+    💙 Liked:
+    {% else %}
+    ❤️ Likes:
+    {% endif %}
+    {{ comment.likes.count}}
+</div>
+{% endif %}
+    
+    {% if user.is_authenticated and user != comment.author %}
+    <a class="text-white cursor-pointer btn btn-sm bg-slate-400 hover:bg-gray-600 hover:shadow-md"
+    hx-get="{% url 'like-comment' comment.id %}"
+    hx-target="closest div"
+    hx-swap="outerHTML">
+        {% if user in comment.likes.all %}
+        Unlike
+        {% else %}
+        Like
+        {% endif %}
+    </a>
+    {% endif %}
+</div>

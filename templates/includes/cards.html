@@ -1,0 +1,136 @@
+{% load static %}
+
+<!-- {% if plots %} -->
+    
+
+    
+<div class="grid grid-cols-1 gap-6 mt-3 lg:grid-cols-2 xl:grid-cols-3">
+    
+    {% for plot in plots %}
+    {% if plot.approved %}
+    <div class="w-full p-4 mx-auto bg-gray-200 card dark:bg-gray-400">
+        <h3 class="text-2xl font-semibold text-center text-blue-900 dark:text-white"> {{ plot.title }}</h3>
+        {% if plot.categories == 'Campsite' %}
+        <a class="block px-3 mt-3 text-center text-white bg-blue-600 btn hover:bg-blue-500 hover:shadow-md" href="{% url 'campsite-plots' %}">Campsite</a>
+        {% endif %}
+
+        {% if plot.categories == 'Official' %}
+        <a class="block px-3 mt-3 text-center text-white bg-yellow-500 btn hover:bg-yellow-400 hover:shadow-md" href=" {% url 'official-plots' %}">Official</a>
+        {% endif %}
+
+        {% if plot.categories == 'Wild' %}
+        <a class="block px-3 mt-3 text-center text-white bg-green-700 btn hover:bg-green-600 hover:shadow-md" href=" {% url 'wild-plots' %}">Wild</a>
+        {% endif %}
+
+
+        {% if plot.owner %}
+        <a href="{% url 'user-profile' plot.owner.username %}">
+        <p class="my-2 text-center text-blue-900 border-2 btn border-sky-400 hover:bg-blue-300 dark:text-sky-100 ">
+                User Name - {{ plot.owner }}
+            </p>
+        </a>
+        {% else %}
+        <h3 class="block my-2 text-blue-900 border-2 btn border-sky-400 dark:text-white ">
+            No owner</h3>
+        
+        {% endif %}
+        <p class="text-truncate dark:text-white"><strong>Description:</strong> {{ plot.description }}</p>
+        <p class="dark:text-white"><strong>Campsite:</strong> {{ plot.campsite }}</p>
+        <p class="dark:text-white"><strong>Price for the night:</strong> {{ plot.price }}</p>
+        <p class="dark:text-white"><strong>Season:</strong> {{ plot.season }}</p>
+        <p class="dark:text-white"><strong>Country: {{ plot.countries }}</strong></p>
+
+        <!-- Image of the plot here -->
+        <figure>
+
+            {% if plot.plot_image %}
+
+            <a href="{% url 'show-plot' plot.id %}"><img class="w-full" src="{{ plot.plot_image.url }}" alt="plot image"></a>
+            {% else %}
+            <a href="{% url 'show-plot' plot.id %}"><img class="w-100" src="{% static 'images/default.jpg' %}" alt="Default image"></a>
+            {% endif %}
+        </figure>
+        {% if profile.level == 'Banned' %}
+        <p>Please enjoy</p>
+        {% else %}
+        <a class="block mt-4 text-center btn bg-sky-400 hover:bg-sky-300 hover:shadow-md dark:bg-sky-700 dark:text-gray-200" href="{% url 'show-plot' plot.id %}">
+            View Plot - Comments - replies</a>
+        {% endif %}
+        <hr class="my-3">
+
+        <!-- Next bit -->
+        <div class="flex flex-col justify-between mx-3">
+            <div>
+                {% if plot.comments.count %}
+                <h5 class="mt-2 text-xl text-center text-blue-700 dark:text-white ">
+                    📣 
+                    Comments: <span class="">{{ plot.comments.count }}</span>
+                </h5>
+                {% endif %} 
+            </div>
+            <div>
+                <h5 class="mb-3 text-xl text-center text-blue-700 dark:text-white ">
+                            
+                    {% if user in plot.likes.all %}
+                    💙 Liked: {{ plot.likes.count }}
+                    {% else %}
+                    ❤️ Likes: {{ plot.likes.count }}    
+                    {% endif %}
+                        
+                </h5>
+            </div>
+        </div>
+            {% if user.is_authenticated and user != plot.owner %}
+        <div class="flex justify-between m-4 ">
+            
+            {% if user in plot.likes.all %}
+            <p class="px-3 text-blue-800 hover:shadow-md dark:text-white ">You liked this 💙 💙</p><span></span>
+            {% else %}
+            <a class="p-2 border-2 border-yellow-500 rounded-md hover:bg-yellow-500 hover:shadow-md dark:text-white " href="{% url 'like-plot' plot.id %}">Add a Like</a>
+            {% endif %}
+            <a class="flex items-center px-2 border-2 border-red-600 rounded-md hover:bg-red-500 hover:text-white hover:shadow-md dark:text-white " href="{% url 'report-plot' plot.id %}">Report</a>
+            
+        </div>
+        {% endif %}
+
+
+        
+    </div>
+        
+    {% endif %}
+    {% endfor %}
+        
+
+    
+</div>
+
+
+<div class="flex items-center justify-center mx-auto mt-4">
+    
+    <div class="flex p-2 space-x-4">
+        {% if plots.has_previous %}
+            <a class="hover:bg-yellow-400" href="?page=1">&laquo First</a>
+            <a class="hover:bg-yellow-400" href="?page={{ plots.previous_page_number }}">Previous</a>
+        {% endif %}
+    </div>
+
+    
+    <div class="p-2 bg-gray-200 border-2 border-gray-400 rounded-md">Page {{ plots.number }} of {{ plots.paginator.num_pages }}</div>
+
+    <div class="flex p-2 space-x-4">
+        {% if plots.has_next %}
+        <a href="?page={{ plots.next_page_number }}">Next</a>
+            <a href="?page={{ plots.paginator.num_pages }}">Last &raquo;</a>
+        {% endif %}
+    </div>
+        
+</div>
+
+
+<!-- {% else %}
+<h1 class="text-2xl font-semibold text-center">No Plots to Show Yet !!</h1>
+<p class="text-center">Add your plots with the Add Plot button on the menu bar above</p>
+ <a href="{% url 'add-plot' %}"
+                    class="block p-2 py-2 pl-3 pr-4 mt-4 text-center text-purple-700 bg-yellow-400 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-purple-700 dark:hover:text-white lg:dark:hover:bg-transparent btn">Add Plot</a>
+               
+{% endif %} -->

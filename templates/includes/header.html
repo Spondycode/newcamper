@@ -2,12 +2,21 @@
     <div>
         <a class="flex items-center gap-2" href="/">
             <img class="h-6" src="/static/images/logo.svg" alt="Logo"/>
-            <span class="text-lg font-bold">Project Title</span>
+            <span class="text-lg font-bold">New Camper</span>
         </a>
     </div>
     <nav class="block bg-purple-800 relative">
         <ul class="navitems flex items-center justify-center h-full">
             {% if request.user.is_authenticated %}
+
+
+            {% if not user.profile.level == 'Banned' %}
+            <li>
+                <a href="{% url 'add-plot' %}"
+                class="block py-2 pl-3 pr-4 text-center text-purple-800 hover:bg-gray-50 lg:hover:bg-yellow-300 lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-purple-700 dark:hover:text-white lg:dark:hover:bg-transparent">Add Plot</a>
+            </li>
+            {% endif %}
+
             <li><a href="/">Home</a></li>
             <li x-data="{ dropdownOpen: false }" class="relative">
                 <a @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="cursor-pointer select-none">

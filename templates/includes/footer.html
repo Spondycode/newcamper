@@ -1,0 +1,21 @@
+{% load static %}
+  <footer class="p-1 text-sm text-center text-white bg-purple-800 navbar sticky-bottom row bg-info ">
+    <span class="mt-2 ">Copyright &copy; 2024 SuperCamper</span>
+    
+      <a href="{% url 'home' %}">
+        <img class="hidden pl-4 ml-6 md:visible" width="48" height="48" src="{% static 'images/tent-logo.png' %}"
+          alt="external-tent-camping" />
+      </a>
+
+    <div class="flex items-center justify-around">
+      <a class="mt-1 text-sm col" href="{% url 'about' %}">About</a>
+      <a class="mt-1 text-sm col" href="{% url 'plot-table' %}">Table View</a>
+      {% if user.is_superuser %}
+        <a class="text-sm col" href="{% url 'check-reports' %}">Reports</a>
+      {% endif %}
+      
+        <a class="text-sm col" href="{% url 'questions' %}">FAQ</a>
+    </div>
+    
+
+  </footer>
