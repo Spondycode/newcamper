@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     # "django_cleanup.apps.CleanupConfig",
 ]
 
+SITE_ID = 1
+
 INTERNAL_IPS = [
 "127.0.0.1",
 "localhost:8000"

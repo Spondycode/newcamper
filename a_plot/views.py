@@ -50,7 +50,7 @@ def add_plot_view(request):
         "submitted": submitted,
     }
     print(form.errors)
-    return render(request, "a_plots/add_plot.html", context)
+    return render(request, "a_plot/add_plot.html", context)
 
 
 # To edit a plot, we need to get the plot id from the URL, then get the plot from the database, and then edit it.
@@ -70,7 +70,7 @@ def edit_plot_view(request, pk):
             form.save()
             messages.success(request, "Plot updated successfully")
             return redirect("home")
-    return render(request, "a_plots/edit_plot.html", context)
+    return render(request, "a_plot/edit_plot.html", context)
 
 
 # REPORT A PLOT
@@ -93,7 +93,7 @@ def report_plot_view(request, pk):
             form.save()
             messages.success(request, "Plot reported successfully")
             return redirect("home")
-    return render(request, "a_plots/report_plot.html", context)
+    return render(request, "a_plot/report_plot.html", context)
 
 
 # To delete the plot, we need to get the plot id from the URL, then get the plot from the database, and then delete it.
@@ -108,7 +108,7 @@ def delete_plot_view(request, pk):
         plot.delete()
         messages.success(request, "Plot deleted successfully")
         return redirect("home")
-    return render(request, "a_plots/delete_plot.html", context)
+    return render(request, "a_plot/delete_plot.html", context)
 
 
 #CHECK REPORTED PLOTS
@@ -134,12 +134,12 @@ def check_reports_view(request):
             return redirect("home")
         else:
             
-            return render(request, "a_plots/check_reported.html", context)
+            return render(request, "a_plot/check_reported.html", context)
     else:
         messages.success(request, "You are Not Authorised")
         return redirect("home")
     
-    return render(request, "a_plots/check_reported.html", context)
+    return render(request, "a_plot/check_reported.html", context)
 
 
 @login_required
@@ -152,7 +152,7 @@ def plot_view(request, plot_id):
         "commentform": commentform,
         "replyform": replyform,
     }
-    return render(request, "a_plots/plotpage.html", context)
+    return render(request, "a_plot/plotpage.html", context)
 
 
 @login_required
@@ -162,7 +162,7 @@ def my_plots_view(request):
         context = {
             "plots": plots,
         }
-        return render(request, "a_plots/myplots.html", context)
+        return render(request, "a_plot/myplots.html", context)
         
     else:
         messages.success(request, "You need to login first")
@@ -180,7 +180,7 @@ def country_view(request):
     context = {
         "plots": plots,
     }
-    return render(request, "a_plots/country_view.html", context)
+    return render(request, "a_plot/country_view.html", context)
 
 
 
@@ -200,7 +200,7 @@ def questions_view(request):
     context = {
         "title": title,
     }
-    return render(request, "a_plots/questions.html", context)
+    return render(request, "a_plot/questions.html", context)
 
 
 
@@ -223,7 +223,7 @@ def search_plots_view(request):
             "search": search,
             "page": page,
         }
-        return render(request, "a_plots/plot_search.html", context)
+        return render(request, "a_plot/plot_search.html", context)
         plots = Plot.objects.filter(title__icontains=query)  # noqa: F821
         
     else:
@@ -231,7 +231,7 @@ def search_plots_view(request):
     context = {
         "plots": plots,
     }
-    return render(request, "a_plots/plot_search.html", context)
+    return render(request, "a_plot/plot_search.html", context)
 
 
 # search plots by campsite
@@ -249,7 +249,7 @@ def search_campsites_view(request):
             "search": search,
             "page": page,
         }
-        return render(request, "a_plots/campsite_search.html", context)
+        return render(request, "a_plot/campsite_search.html", context)
         plots = Plot.objects.filter(campsite__icontains=query)  # noqa: F821
     else:
         plots = Plot.objects.all()
@@ -257,7 +257,7 @@ def search_campsites_view(request):
         "plots": plots,
     }
     
-    return render(request, "a_plots/campsite_search.html", context)
+    return render(request, "a_plot/campsite_search.html", context)
 
 
 
@@ -277,7 +277,7 @@ def search_countries_view(request):
             "search": search,
             "page": page,
         }
-        return render(request, "a_plots/country_search.html", context)
+        return render(request, "a_plot/country_search.html", context)
         plots = Plot.objects.filter(countries__icontains=query)  # noqa: F821
     else:
         plots = Plot.objects.all()
@@ -285,7 +285,7 @@ def search_countries_view(request):
         "plots": plots,
     }
     
-    return render(request, "a_plots/country_search.html", context)
+    return render(request, "a_plot/country_search.html", context)
 
 
 
@@ -306,7 +306,7 @@ def campsite_plots_view(request):
             "page": page,
             
         }
-        return render(request, "a_plots/campsite_plots.html", context)
+        return render(request, "a_plot/campsite_plots.html", context)
         
     else:
         messages.success(request, "You need to login first")
@@ -330,7 +330,7 @@ def official_plots_view(request):
             "plots": plots,
             "page": page,
         }
-        return render(request, "a_plots/official_plots.html", context)
+        return render(request, "a_plot/official_plots.html", context)
         
     else:
         messages.success(request, "You need to login first")
@@ -349,7 +349,7 @@ def wild_plots_view(request):
             "plots": plots,
             "page": page,
         }
-        return render(request, "a_plots/wild_plots.html", context)
+        return render(request, "a_plot/wild_plots.html", context)
         
     else:
         messages.success(request, "You need to login first")
@@ -370,7 +370,7 @@ def like_plot(request, pk):
         else:
             plot.likes.add(request.user)
         
-    return render(request, "a_plots/plotpage.html", {"plot": plot})
+    return render(request, "a_plot/plotpage.html", {"plot": plot})
 
 @login_required
 def like_comment(request, pk):
@@ -455,7 +455,7 @@ def delete_comment(request, pk):
         messages.success(request, "Comment deleted successfully")
         return redirect("show-plot", comment.parent_plot.id)
     
-    return render(request, "a_plots/delete_comment.html", context)
+    return render(request, "a_plot/delete_comment.html", context)
 
 
 
@@ -471,7 +471,7 @@ def delete_reply(request, pk):
         messages.success(request, "Reply deleted successfully")
         return redirect("show-plot", reply.parent_comment.parent_plot.id)
     
-    return render(request, "a_plots/delete_reply.html", context)
+    return render(request, "a_plot/delete_reply.html", context)
 
 
 @login_required
@@ -485,4 +485,4 @@ def plot_table_view(request):
         "plots": plots,
         "page": page,
     }
-    return render(request, "a_plots/table_view.html", context)
+    return render(request, "a_plot/table_view.html", context)
