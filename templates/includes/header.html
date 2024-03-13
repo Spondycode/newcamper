@@ -23,8 +23,14 @@
                     <ul class="hoverlist [&>li>a]:justify-end">
                         <li><a href="{% url 'profile' %}">My Profile</a></li>
                         <li><a href="{% url 'profile-edit' %}">Edit Profile</a></li>
-            <li><a href="{% url 'profile-settings' %}">Settings</a></li>
+                        <li><a href="{% url 'profile-settings' %}">Settings</a></li>
                         <li><a href="{% url 'account_logout' %}">Log Out</a></li>
+                        {% if user.is_superuser %}
+                        <li>
+                            <a href="{% url 'check-reports' %}"
+                            class="block py-2 pl-3 pr-4 text-center text-purple-800 hover:bg-gray-50 lg:hover:bg-yellow-300 lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-purple-700 dark:hover:text-white lg:dark:hover:bg-transparent">Reports</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </li>
